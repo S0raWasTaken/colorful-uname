@@ -131,13 +131,13 @@ or available locally via: info '(coreutils) uname invocation'";
     }
 
     if matches.is_present("kernel-name") {
-        output = format!("{}", kernel_name.color(Color::Purple1b));
+        output = format!("{}", kernel_name.as_str().color(Color::Purple1b));
     }
     if matches.is_present("nodename") {
         output = format!("{} {}", output, nodename.color(Color::Yellow));
     }
     if matches.is_present("kernel-release") {
-        output = format!("{} {}", output, kernel_release.color(Color::Red));
+        output = format!("{} {}", output, kernel_release.as_str().color(Color::Red));
     }
     if matches.is_present("kernel-version") {
         output = format!("{} {}", output, kernel_version.color(Color::Blue));
@@ -153,6 +153,10 @@ or available locally via: info '(coreutils) uname invocation'";
     }
     if matches.is_present("operating-system") {
         output = format!("{} {}", output, operating_system.color(Color::Black));
+    }
+
+    if output.is_empty() {
+        output = format!("{} {}", kernel_name.color(Color::Purple1b), kernel_release.color(Color::Red))
     }
     println!("{}", output.trim());
     Ok(())
