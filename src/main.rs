@@ -3,7 +3,6 @@ use std::process::Command;
 use clap::{App, Arg};
 use colorful::{Color, Colorful};
 
-#[allow(unused_variables)]
 fn main() -> Result<(), String> {
     let kernel_name = uname("-s")?;
     let nodename = uname("-n")?;
